@@ -1,9 +1,11 @@
 import 'dart:io';
 
 class ProfileModel {
-  File? imageFile;
+  String? id;
   String? uid;
-  String? imgUrl;
+  String? downloadImgUrl;
+  String? localImgPath;
+  String? cloudImgPath;
   String? email;
   String? fullName;
   String? phoneNumber;
@@ -13,9 +15,11 @@ class ProfileModel {
 
   ProfileModel(
       {
+      this.id,
       this.uid,
-      this.imageFile,
-      this.imgUrl,
+      this.downloadImgUrl,
+      this.cloudImgPath,
+      this.localImgPath,
       this.email,
       this.fullName,
       this.phoneNumber,
@@ -24,8 +28,11 @@ class ProfileModel {
       this.newPassword});
 
   ProfileModel.fromData(Map<String, dynamic> data)
-      :
-        imgUrl = data['img_url'],
+      : id = data['id'],
+        uid = data['uid'],
+        downloadImgUrl = data['img_url'],
+        cloudImgPath = data['cloud_path'],
+        localImgPath = data['local_path'],
         email = data['email'],
         fullName = data['full_name'],
         phoneNumber = data['phone_number'],
@@ -33,7 +40,11 @@ class ProfileModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'img_url': imgUrl,
+      'id': id,
+      'uid': uid,
+      'img_url': downloadImgUrl,
+      'cloud_path': cloudImgPath,
+      'local_path': localImgPath,
       'email': email,
       'full_name': fullName,
       'phone_number': phoneNumber,
@@ -43,6 +54,6 @@ class ProfileModel {
 
   @override
   String toString() {
-    return 'ProfileModel {image: ${imgUrl}, email:$email, fullName: $fullName, phoneNumber: $phoneNumber, address: $address, oldPassword: $oldPassword, newPassword: $newPassword}';
+    return 'ProfileModel{uid: $uid, downloadImgUrl: $downloadImgUrl, localImgPath: $localImgPath, cloudImgPath: $cloudImgPath, email: $email, fullName: $fullName, phoneNumber: $phoneNumber, address: $address, oldPassword: $oldPassword, newPassword: $newPassword}';
   }
 }

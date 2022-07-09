@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +11,7 @@ class Helper{
 
   static void failNotice(String title, String body, String message, String error) {
     Get.snackbar(title, body,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.pinkAccent,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
           message,
@@ -23,6 +21,16 @@ class Helper{
           error,
           style: const TextStyle(color: Colors.white),
         ));
+  }
+
+  static void successNotice(String title, String body) {
+    Get.snackbar(title, body,
+        backgroundColor: Colors.greenAccent,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(title,
+          style: const TextStyle(color: Colors.white),),
+        messageText: Text(body,
+          style: const TextStyle(color: Colors.white),));
   }
 
 }

@@ -9,7 +9,7 @@ class LoginPageController extends GetxController {
   var userName = ''.obs;
   var password = ''.obs;
   var loading = false.obs;
-
+  final formKey = GlobalKey<FormState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -21,8 +21,9 @@ class LoginPageController extends GetxController {
   }
 
   void saveLoginData(BuildContext context) async {
-    loading.value = true;
-    if (userName.value.isNotEmpty && password.value.isNotEmpty) {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      loading.value = true;
       try {
         final user = await FireBaseAuthService.login(userName.value, password.value);
         loading.value = false;

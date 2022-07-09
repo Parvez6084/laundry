@@ -19,4 +19,17 @@ class DBFireBase{
     return snapshot;
   }
 
+  static Future<void> addUserProfile(ProfileModel profileModel){
+    final batch = _db.batch();
+    final docUser = _db.collection(AppConst.collectionUser).doc();
+    profileModel.id = docUser.id;
+    batch.set(docUser, profileModel.toJson());
+    return batch.commit();
+  }
+
+  static Future<void> updateUserProfile(ProfileModel profileModel,){
+    final docUser = _db.collection(AppConst.collectionUser).doc(profileModel.id).update(profileModel.toJson());
+    return docUser;
+  }
+
 }

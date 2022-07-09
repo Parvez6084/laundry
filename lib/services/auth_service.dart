@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../model/registration_model.dart';
 
 class FireBaseAuthService {
@@ -28,5 +29,7 @@ class FireBaseAuthService {
   }
 
   static Future<void>logout()async{ return _auth.signOut();}
+
+  
 
 }

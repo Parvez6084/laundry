@@ -24,51 +24,54 @@ class LoginPage extends GetView<LoginPageController> {
               top: 30,
               child: Padding(
                   padding: const EdgeInsets.all(32),
-                  child:  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          AppString.appName,
-                          style: TextStyle(
-                              color: Colors.deepOrangeAccent,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        TextFieldWidget(
-                          controller: controller.userNameController,
-                          keyboardType: TextInputType.text,
-                          label: 'Email',
-                          obscureText: false,
-                          onChanged: (value) {
-                            controller.userName.value = value.trim();
-                          },
-                        ),
-                        TextFieldWidget(
-                          controller: controller.passwordController,
-                          keyboardType: TextInputType.visiblePassword,
-                          label: 'Password',
-                          obscureText: true,
-                          onChanged: (value) {
-                            controller.password.value = value.trim();
-                          },
-                        ),
-                        const SizedBox(height: 40,),
-                        SizedBox(
-                          width: size.width,
-                          child: ElevatedButton(
-                            onPressed: () {controller.saveLoginData(context);},
-                            style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                            child: const Text('Submit'),
+                  child:  Form(
+                    key: controller.formKey,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            AppString.appName,
+                            style: TextStyle(
+                                color: Colors.deepOrangeAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
                           ),
-                        ),
-                      ],
-                    ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          TextFieldWidget(
+                            controller: controller.userNameController,
+                            keyboardType: TextInputType.text,
+                            label: 'Email',
+                            obscureText: false,
+                            onChanged: (value) {
+                              controller.userName.value = value.trim();
+                            },
+                          ),
+                          TextFieldWidget(
+                            controller: controller.passwordController,
+                            keyboardType: TextInputType.visiblePassword,
+                            label: 'Password',
+                            obscureText: true,
+                            onChanged: (value) {
+                              controller.password.value = value.trim();
+                            },
+                          ),
+                          const SizedBox(height: 40,),
+                          SizedBox(
+                            width: size.width,
+                            child: ElevatedButton(
+                              onPressed: () {controller.saveLoginData(context);},
+                              style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              child: const Text('Submit'),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ),
               ),
             ),
             Obx(() => Align(alignment:Alignment.center,

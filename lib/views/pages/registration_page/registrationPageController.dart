@@ -20,9 +20,9 @@ class RegistrationPageController extends GetxController{
   TextEditingController rePasswordController = TextEditingController();
 
   void saveRegistrationData(BuildContext context) async {
-    loading.value = true;
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      loading.value = true;
       try{
        final user = await FireBaseAuthService.registration(registration.value);
        loading.value = false;
