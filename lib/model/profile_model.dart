@@ -2,6 +2,7 @@ import 'dart:io';
 
 class ProfileModel {
   File? imageFile;
+  String? uid;
   String? imgUrl;
   String? email;
   String? fullName;
@@ -11,7 +12,9 @@ class ProfileModel {
   String? newPassword;
 
   ProfileModel(
-      {this.imageFile,
+      {
+      this.uid,
+      this.imageFile,
       this.imgUrl,
       this.email,
       this.fullName,
@@ -21,7 +24,8 @@ class ProfileModel {
       this.newPassword});
 
   ProfileModel.fromData(Map<String, dynamic> data)
-      : imageFile = data['img_url'],
+      :
+        imgUrl = data['img_url'],
         email = data['email'],
         fullName = data['full_name'],
         phoneNumber = data['phone_number'],
@@ -39,6 +43,6 @@ class ProfileModel {
 
   @override
   String toString() {
-    return 'ProfileModel {image: ${imageFile?.path}, email:$email, fullName: $fullName, phoneNumber: $phoneNumber, address: $address, oldPassword: $oldPassword, newPassword: $newPassword}';
+    return 'ProfileModel {image: ${imgUrl}, email:$email, fullName: $fullName, phoneNumber: $phoneNumber, address: $address, oldPassword: $oldPassword, newPassword: $newPassword}';
   }
 }

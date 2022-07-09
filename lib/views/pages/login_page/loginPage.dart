@@ -1,4 +1,5 @@
 import 'package:destination/consts/app_const.dart';
+import 'package:destination/consts/app_string.dart';
 import 'package:destination/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class LoginPage extends GetView<LoginPageController> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Text(
-                          AppConst.appName,
+                          AppString.appName,
                           style: TextStyle(
                               color: Colors.deepOrangeAccent,
                               fontWeight: FontWeight.bold,
@@ -43,7 +44,7 @@ class LoginPage extends GetView<LoginPageController> {
                           label: 'Email',
                           obscureText: false,
                           onChanged: (value) {
-                            controller.userName.value = value;
+                            controller.userName.value = value.trim();
                           },
                         ),
                         TextFieldWidget(
@@ -52,7 +53,7 @@ class LoginPage extends GetView<LoginPageController> {
                           label: 'Password',
                           obscureText: true,
                           onChanged: (value) {
-                            controller.password.value = value;
+                            controller.password.value = value.trim();
                           },
                         ),
                         const SizedBox(height: 40,),

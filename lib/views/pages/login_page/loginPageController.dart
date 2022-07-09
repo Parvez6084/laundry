@@ -21,14 +21,14 @@ class LoginPageController extends GetxController {
   }
 
   void saveLoginData(BuildContext context) async {
-    loading.isTrue;
+    loading.value = true;
     if (userName.value.isNotEmpty && password.value.isNotEmpty) {
       try {
         final user = await FireBaseAuthService.login(userName.value, password.value);
-        loading.isFalse;
+        loading.value = false;
         if (user != null) { Get.offAllNamed(Routes.homePage);}
       } catch (e) {
-        loading.isFalse;
+        loading.value = false;
         List message = Helper.textSplit(e.toString());
         Helper.failNotice('login', 'login message', 'Login fail', '${message[1]}');
       }

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class TextFieldWidget extends StatelessWidget {
   final String label;
   final bool obscureText;
+  final bool? editable;
   final TextInputType keyboardType;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
@@ -17,6 +18,7 @@ class TextFieldWidget extends StatelessWidget {
     required this.onChanged,
     required this.label,
     required this.obscureText,
+    this.editable = true,
   }) : super(key: key);
 
   @override
@@ -26,13 +28,8 @@ class TextFieldWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          label,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        const SizedBox(
-          height: 4,
-        ),
+          label, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
+        const SizedBox(height: 4,),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -41,12 +38,13 @@ class TextFieldWidget extends StatelessWidget {
             keyboardType: keyboardType,
             obscureText: obscureText,
             onChanged: onChanged,
+            enabled: editable,
             validator: (value) => value!.isEmpty ? 'This field is required' : null,
-            decoration: const InputDecoration(
-                fillColor: Colors.black38,
+            decoration: InputDecoration(
+                fillColor: editable == true? Colors.black26 : Colors.blueGrey,
                 filled: true,
-                contentPadding: EdgeInsets.all(8),
-                border: OutlineInputBorder(
+                contentPadding: const EdgeInsets.all(8),
+                border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(Radius.circular(8)))),
           ),

@@ -1,5 +1,6 @@
 
 import 'package:destination/consts/app_const.dart';
+import 'package:destination/consts/app_string.dart';
 import 'package:destination/views/pages/welcome_page/welcomePageController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +26,7 @@ class WelcomePage extends GetView<WelcomePageController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
-                    AppConst.appName,
+                    AppString.appName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 24,

@@ -16,12 +16,7 @@ class ProfilePage extends GetView<ProfilePageController> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(title: const Text('Profile'), actions: [
-              TextButton(
-                  onPressed: () {controller.logOut();},
-                  child: const Text(
-                    'Log Out',
-                    style: TextStyle(color: Colors.white),
-                  ))
+              IconButton(onPressed: (){}, icon: const Icon(Icons.history))
             ]),
             body: Obx(() {
               return SingleChildScrollView(
@@ -56,9 +51,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                               bottom: 0,
                               right: -25,
                               child: RawMaterialButton(
-                                onPressed: () {
-                                  controller.pickImage();
-                                },
+                                onPressed: () {controller.pickImage();},
                                 elevation: 2.0,
                                 fillColor: Colors.white,
                                 padding: const EdgeInsets.all(8),
@@ -92,7 +85,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                                       color: Colors.black54)),
                                const Spacer(),
                                TextButton(
-                                   onPressed: (){ controller.isEmailVerified.isFalse ? FireBaseAuthService.sendEmailVerification(): null ;},
+                                   onPressed: ()async{ controller.isEmailVerified.isFalse ? await FireBaseAuthService.sendEmailVerification(): null ;},
                                    style: TextButton.styleFrom( backgroundColor: controller.isEmailVerified.isFalse ?  Colors.pink.withOpacity(0.05) : null ),
                                    child: controller.isEmailVerified.isFalse ?
                                    const Text('Not Verified', style: TextStyle( fontWeight: FontWeight.normal, color: Colors.pink),) :
@@ -105,6 +98,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                             controller: controller.fullNameController,
                             keyboardType: TextInputType.text,
                             label: 'Full Name',
+                            editable: controller.editable.value,
                             obscureText: false,
                             onChanged: (value) =>
                                 controller.profileData.value.fullName = value,
@@ -114,6 +108,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                             keyboardType: TextInputType.text,
                             label: 'Phone Number',
                             obscureText: false,
+                            editable: controller.editable.value,
                             onChanged: (value) => controller
                                 .profileData.value.phoneNumber = value,
                           ),
@@ -126,17 +121,18 @@ class ProfilePage extends GetView<ProfilePageController> {
                             style: const TextStyle(color: Colors.black),
                             controller: controller.addressController,
                             keyboardType: TextInputType.multiline,
+                            enabled: controller.editable.value,
                             onChanged: (value) =>
                                 controller.profileData.value.address = value,
                             validator: (value) => value!.isEmpty
                                 ? 'This field is required'
                                 : null,
                             maxLines: 5,
-                            decoration: const InputDecoration(
-                                fillColor: Colors.black38,
+                            decoration: InputDecoration(
+                                fillColor: controller.editable.value == true? Colors.black26 : Colors.blueGrey,
                                 filled: true,
-                                contentPadding: EdgeInsets.all(8),
-                                border: OutlineInputBorder(
+                                contentPadding: const EdgeInsets.all(8),
+                                border: const OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)))),
@@ -144,15 +140,24 @@ class ProfilePage extends GetView<ProfilePageController> {
                           Container(
                             margin: const EdgeInsets.only(top: 16),
                             width: size.width,
-                            child: ElevatedButton(
+                            child:controller.editable.value ?
+                              ElevatedButton(
                               onPressed: () {
-                                controller.addUser();
-                              },
+                                controller.editable.value = false;
+                              //  controller.addUser();
+                                },
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.blue,
                                   textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold)),
-                              child: const Text('Submit'),
+                                  child: const Text('Submit'),
+                            ): ElevatedButton(
+                              onPressed: () {controller.editable.value = true;},
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.orangeAccent,
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              child: const Text('Edit'),
                             ),
                           ),
                         ],
@@ -205,6 +210,18 @@ class ProfilePage extends GetView<ProfilePageController> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(16),
+                      width: size.width,
+                      child: ElevatedButton(
+                        onPressed: () => controller.logOut(),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.pink,
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold)),
+                        child: const Text('LogOut'),
                       ),
                     ),
                   ],

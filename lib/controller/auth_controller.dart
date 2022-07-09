@@ -15,8 +15,6 @@ class AuthController extends GetxController {
   }
 
   _logout(User? user) {
-    if (user == null) {
-      Get.offAllNamed(Routes.loginPage);
-    }
+    if (user == null) {}
   }
 }

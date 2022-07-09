@@ -1,4 +1,5 @@
 
+import 'package:destination/consts/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +33,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                       children: [
                         Container(
                           margin:  const EdgeInsets.only(bottom: 40),
-                          child:  const Text(AppConst.appName,
+                          child:  const Text(AppString.appName,
                             style: TextStyle(
                                 color: Colors.orangeAccent,
                                 fontWeight: FontWeight.bold,
@@ -45,7 +46,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                           keyboardType: TextInputType.text,
                           label: 'Email',
                           obscureText: false,
-                          onChanged: (value) {controller.registration.value.email = value;},
+                          onChanged: (value) {controller.registration.value.email = value.trim();},
                         ),
                         TextFieldWidget(
                           controller: controller.passwordController,
@@ -53,7 +54,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                           label: 'Password',
                           obscureText: true,
                           onChanged: (value) {
-                            controller.registration.value.password = value;
+                            controller.registration.value.password = value.trim();
                           },
                         ),
                         TextFieldWidget(
@@ -62,7 +63,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                           label: 'RePassword',
                           obscureText: true,
                           onChanged: (value) {
-                            controller.registration.value.rePassword = value;
+                            controller.registration.value.rePassword = value.trim();
                           },
                         ),
                         Row(
@@ -98,7 +99,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                                 height: 80,
                                 width: 250,
                                 child: Text(
-                                  AppConst.trams,
+                                  AppString.trams,
                                   textAlign: TextAlign.justify,
                                 )),
                           ],
@@ -130,7 +131,7 @@ class RegistrationPage extends GetView<RegistrationPageController> {
                                 primary: Colors.blue,
                                 textStyle:
                                 const TextStyle(fontWeight: FontWeight.bold)),
-                            child: const Text('Submit'),
+                            child: const Text('Registration'),
                           ),
                         ),
                       ],

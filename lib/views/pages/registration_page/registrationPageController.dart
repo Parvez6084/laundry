@@ -20,15 +20,15 @@ class RegistrationPageController extends GetxController{
   TextEditingController rePasswordController = TextEditingController();
 
   void saveRegistrationData(BuildContext context) async {
-     loading.isTrue;
+    loading.value = true;
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       try{
        final user = await FireBaseAuthService.registration(registration.value);
-       loading.isFalse;
+       loading.value = false;
        if (user != null) { Get.offAllNamed(Routes.homePage);}
       }catch(e){
-        loading.isFalse;
+        loading.value = false;
         List message = Helper.textSplit(e.toString());
         Helper.failNotice('registration', 'registration message', 'Account creating fail', '${message[1]}');
       }
